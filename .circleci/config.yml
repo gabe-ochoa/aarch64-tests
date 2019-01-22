@@ -1,9 +1,14 @@
 version: 2.0
 jobs:
- build:
-   docker:
-     - image: alpine:3.7
-   steps:
+  build:
+    machine:
+      image: circleci/classic:2018-12
+    steps:
+     - checkout
+     - run:
+          name: Register QMEU
+          command: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
      - run:
          name: The First Step
          command: |
