@@ -2,10 +2,6 @@ FROM golang:1.11 as build
 
 COPY ./go ./
 
-RUN make build
+RUN GOARCH=arm64 GOOS=linux CGO_ENABLED=0 go build -o go-aarch64-binary -tags netgo -a -v
 
-FROM alpine
-
-COPY --from=build /go/go-aarch64-binary /go-aarch64-binary
-
-ENTRYPOINT [ "/go-aarch64-binary" ]
+CMD [ "/go/go-aarch64-binary" ]
