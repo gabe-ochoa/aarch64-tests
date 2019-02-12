@@ -6,6 +6,6 @@ RUN make build
 
 FROM alpine
 
-COPY --from=build ./go-aarch64-binary /go-aarch64-binary
+COPY --from=build /go/go-aarch64-binary /go-aarch64-binary
 
 ENTRYPOINT [ "/go-aarch64-binary" ]
