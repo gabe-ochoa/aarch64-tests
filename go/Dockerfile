@@ -1,7 +1,11 @@
-FROM golang:1.11
+FROM golang:1.11 as build
 
 COPY ./go ./
 
 RUN make build
 
-CMD [ "./go-aarch64-binary" ]
+FROM alpine
+
+COPY --from=build ./go-aarch64-binary /go-aarch64-binary
+
+ENTRYPOINT [ "/go-aarch64-binary" ]
