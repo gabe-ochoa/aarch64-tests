@@ -7,12 +7,12 @@ jobs:
      - checkout
      - run:
           name: Register QMEU
-          command: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+          command: docker run --rm --privileged multiarch/qemu-user-static:register
 
      - run:
-          name: Register QMEU
+          name: Build test go docker container
           command: docker build -f go/Dockerfile -t go-aarch-container .
 
      - run:
          name: Test
-         command: docker run go-aarch-container 
+         command: docker run --privileged go-aarch-container 
