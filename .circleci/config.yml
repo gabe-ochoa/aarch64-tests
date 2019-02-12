@@ -10,7 +10,9 @@ jobs:
           command: docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
      - run:
-         name: The First Step
-         command: |
-           echo 'Hello World!'
-           echo 'This is the delivery pipeline'
+          name: Register QMEU
+          command: docker build -f go/Dockerfile -t go-aarch-container .
+
+     - run:
+         name: Test
+         command: docker run go-aarch-container
